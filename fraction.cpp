@@ -4,7 +4,7 @@ int greatestCommonDivisor(int x,int y)
 	if (y==0) return x;
 	else return greatestCommonDivisor(y,x%y);
 }
-int Max(int x,int y)
+/*int Max(int x,int y)
 {
 	if (x>y) return x;
 	else return y;
@@ -13,21 +13,33 @@ int Min(int x,int y)
 {
 	if (x<y) return x;
 	else return y;
-}
-Fraction getFrac(int low,int high)
+}*/
+Fraction getFrac(int l,int h)
 {
 	Fraction frac;
 	int tmp1,tmp2;
 	char tmpc[MAX];
-	stringstream tmps1,tmps2;
-	tmp1=getRand(low,high);
-	tmp2=getRand(low,high);
+	stringstream tmps5,tmps6;
+	tmp1=getRand(l,h);
+	tmp2=getRand(l,h);
 	frac.numerator=Min(tmp1,tmp2);
 	frac.denominator=Max(tmp1,tmp2);
-	tmps1<<frac.numerator;
-	tmps1>>frac.numerators;
-	tmps2<<frac.denominator;
-	tmps2>>frac.denominators;
+	tmps5<<frac.numerator;
+	tmps5>>frac.numerators;
+	tmps6<<frac.denominator;
+	tmps6>>frac.denominators;
+	return frac;
+}
+Fraction transFrac(int up,int down)
+{
+	Fraction frac;
+	stringstream tmps9,tmps10;
+	frac.numerator=up;
+	frac.denominator=down;
+	tmps9<<frac.numerator;
+	tmps9>>frac.numerators;
+	tmps10<<frac.denominator;
+	tmps10>>frac.denominators;
 	return frac;
 }
 Fraction fixUp(Fraction frac)
@@ -43,7 +55,7 @@ Fraction simplifyFrac(Fraction frac)
 {
 	int tmp;
 	char tmpc[MAX];
-	stringstream tmps1,tmps2;
+	stringstream tmps7,tmps8;
 	fixUp(frac);
 	if (frac.numerator==0) frac.denominator=1;
 	else
@@ -52,10 +64,10 @@ Fraction simplifyFrac(Fraction frac)
 		frac.numerator/=tmp;
 		frac.denominator/=tmp;
 	}
-	tmps1<<frac.numerator;
-	tmps1>>frac.numerators;
-	tmps2<<frac.denominator;
-	tmps2>>frac.denominators;
+	tmps7<<frac.numerator;
+	tmps7>>frac.numerators;
+	tmps8<<frac.denominator;
+	tmps8>>frac.denominators;
 	return frac;
 }
 Fraction addFrac(Fraction frac1,Fraction frac2)
