@@ -4,16 +4,6 @@ int greatestCommonDivisor(int x,int y)
 	if (y==0) return x;
 	else return greatestCommonDivisor(y,x%y);
 }
-/*int Max(int x,int y)
-{
-	if (x>y) return x;
-	else return y;
-}
-int Min(int x,int y)
-{
-	if (x<y) return x;
-	else return y;
-}*/
 Fraction getFrac(int l,int h)
 {
 	Fraction frac;

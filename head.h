@@ -12,14 +12,12 @@
 #define random(a,b) (rand()%(b-a+1)+a)   
 #define MAX 1000
 using namespace std;
-//extern int flag;   /*声明外部变量*/
 
-            /*Calculate.cpp*/ 
+/*generate.cpp*/ 
 int getRand(int down,int up);
-int ifOnly(string str,string equation);
 void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3);
 
-            /*Fraction.cpp*/
+/*Fraction.cpp*/
 struct Fraction
 {
 	int numerator,denominator;
@@ -35,6 +33,11 @@ Fraction minusFrac(Fraction frac1,Fraction frac2);
 Fraction multiplyFrac(Fraction frac1,Fraction frac2);
 Fraction divideFrac(Fraction frac1,Fraction frac2);
 
-			/*Stack.cpp*/ 
+/*Stack.cpp*/ 
 void transEquation(string infix,char postfix[]);
 Fraction countEquation(string infix);
+
+/*verify*/
+int ifOnly(string str,string se[],int k);
+void checkAndOutput(string equ,int n);
+void finalOut();

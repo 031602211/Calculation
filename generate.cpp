@@ -1,37 +1,26 @@
 #include"head.h"
 int flag=1,k=0;
-int getRand(int down,int up)//ç”Ÿæˆéšæœºæ•° 
+int getRand(int down,int up)//Éú³ÉËæ»úÊı 
 {
 	if (flag==1)
 	{
 		flag=0;
-		srand((unsigned)time(NULL));//ç§å­ 
+		srand((unsigned)time(NULL));//ÖÖ×Ó 
     }
     return random(down,up);
-}
-int ifOnly(string str,string se[])
-{
-	int count=0;
-	for (int i=0;i<k;i++)
-	{
-		if (str!=se[i]) count++;
-		else break;
-	}
-	    if (count==k) return 1;
-		else return 0;
 }
 string equation[MAX];
 void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 {
-	int i=1,para1,para2,right=0,wrong=0,tmp;
+	int i=1,tmp;
 	char sign;
 	while (i<=num)
 	{
 		int flag4=1,number=getRand(2,7);
-		string paras1,paras2,equ,ans;
+		string paras1,paras2,equ;
 		for (int j=0;j<number;j++)
 		{
-			if (flag1=='y') //å…è®¸ä¹˜é™¤ 
+			if (flag1=='y') //ÔÊĞí³Ë³ı 
 			{
 				tmp=getRand(1,4);
 				switch (tmp)
@@ -57,33 +46,30 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 					       break;
 				}
 			}
-			if (flag2=='y') //å…è®¸åˆ†æ•° 
+			if (flag2=='y') //ÔÊĞí·ÖÊı 
 			{
 				tmp=getRand(1,3);
 				switch (tmp)
 				{
-					case 1: //æ•´æ•°å’Œæ•´æ•° 
+					case 1: //ÕûÊıºÍÕûÊı 
 					{
     				    stringstream tmps1,tmps2;
-        				para1=getRand(low,high);
-     	    			tmps1<<para1;
+     	    			tmps1<<getRand(low,high);
 	        			tmps1>>paras1;
-		        		para2=getRand(low,high);
-		        		tmps2<<para2;
+		        		tmps2<<getRand(low,high);
 			        	tmps2>>paras2;
 		  				break;
 				    }
-					case 2: //æ•´æ•°å’ŒçœŸåˆ†æ•° 
+					case 2: //ÕûÊıºÍÕæ·ÖÊı 
 					{
 						stringstream tmps;
-						para1=getRand(low,high);
-						tmps<<para1;
+						tmps<<getRand(low,high);
 						tmps>>paras1;
 						Fraction frac2=simplifyFrac(getFrac(low,high));
 						paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
 						break;
 					}
-					case 3: //åˆ†æ•°å’Œåˆ†æ•° 
+					case 3: //·ÖÊıºÍ·ÖÊı 
 					{
 						Fraction frac1=simplifyFrac(getFrac(low,high));
 						Fraction frac2=simplifyFrac(getFrac(low,high));
@@ -96,14 +82,12 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 			else
 			{
 				stringstream tmps3,tmps4;
-				para1=getRand(low,high);
-				tmps3<<para1;
+				tmps3<<getRand(low,high);
 				tmps3>>paras1;
-				para2=getRand(low,high);
-				tmps4<<para2;
+				tmps4<<getRand(low,high);
 				tmps4>>paras2;
 			}
-			if (flag3=='y') //å…è®¸æ‹¬å·
+			if (flag3=='y') //ÔÊĞíÀ¨ºÅ
 			{
 				tmp=getRand(1,4);
 				switch (tmp)
@@ -177,33 +161,13 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 				}
 			}
 		}
-	 
-		if (ifOnly(equ,equation)==1)
+		if (ifOnly(equ,equation,k)==1)
 		{
-			Fraction solution=countEquation(equ);
-			string result;
-			if (solution.denominator==1) result=solution.numerators;
-			else result=solution.numerators+"\\"+solution.denominators;
-			//{
-				//result=solution.numerators;
-				k++;
-				equation[k]=equ;
-				cout<<"("<<i<<") "<<equ<<"=";
-				cin>>ans;
-				if (ans==result)
-				{
-					cout<<"æ­£ç¡®"<<endl;
-					right++;
-				}
-				else
-				{
-					cout<<"é”™è¯¯ï¼Œæ­£ç¡®ç­”æ¡ˆä¸ºï¼š"<<result<<endl;
-					wrong++;
-				}
-				i++;
-			//}
+			k++;
+			equation[k]=equ;
+            checkAndOutput(equ,i);
+			i++;
 		}
 	}
-	cout<<"********************************************************************"<<endl;
-	cout<<"åšå¯¹äº†"<<right<<"é“é¢˜ï¼Œåšé”™äº†"<<wrong<<"é“é¢˜";
+    finalOut();
 }
