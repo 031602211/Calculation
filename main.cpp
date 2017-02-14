@@ -1,4 +1,5 @@
 #include"head.h"
+//#include"fraction.h"
 int main()
 {
 	int i,j,k,num,low,high;

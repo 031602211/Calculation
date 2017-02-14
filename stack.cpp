@@ -1,4 +1,5 @@
 #include"head.h"
+//#include"fraction.h"
 stack<char> stored;
 void transEquation(string infix,char postfix[])
 {
@@ -70,7 +71,7 @@ void transEquation(string infix,char postfix[])
 	postfix[j]='\0';
 }
 Fraction figure[MAX];
-Fraction countEquation(string infix)
+string countEquation(string infix)
 {
 	int i=0,point=-1;
 	char postfix[MAX];
@@ -86,7 +87,7 @@ Fraction countEquation(string infix)
 				i++;
 			}
 			point++;
-			figure[point]=transFrac(k,1);
+			figure[point]=figure[point].transFrac(k,1);
     	}
     	else
     	if (postfix[i]=='(')
@@ -105,23 +106,23 @@ Fraction countEquation(string infix)
 				i++;
 			}
 			point++;
-			figure[point]=transFrac(up,down);
+			figure[point]=figure[point].transFrac(up,down);
 		}
 		else
 		{
 			point--;
 			switch (postfix[i])
 			{
-				case '+':figure[point]=addFrac(figure[point],figure[point+1]);
+				case '+':figure[point]=figure[point]+figure[point+1];
 				         break;
-				case '-':figure[point]=minusFrac(figure[point],figure[point+1]);
+				case '-':figure[point]=figure[point]-figure[point+1];
 				         break;
-				case '*':figure[point]=multiplyFrac(figure[point],figure[point+1]);
+				case '*':figure[point]=figure[point]*figure[point+1];
 				         break;
-				case '/':figure[point]=divideFrac(figure[point],figure[point+1]);
+				case '/':figure[point]=figure[point]/figure[point+1];
 			}
 		}
 		i++;
 	}
-	return figure[point];
+	return figure[point].transToString(figure[point]);
 }

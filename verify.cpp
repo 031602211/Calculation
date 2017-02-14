@@ -1,4 +1,5 @@
 #include"head.h"
+//#include"fraction.h"
 int correct=0,wrong=0;
 int ifOnly(string str,string se[],int k)
 {
@@ -13,10 +14,11 @@ int ifOnly(string str,string se[],int k)
 }
 void checkAndOutput(string equ,int n)
 {
-	Fraction solution=countEquation(equ);
+	/*Fraction solution=countEquation(equ);
 	string result,ans;
 	if (solution.denominator==1) result=solution.numerators;
-	else result=solution.numerators+"\\"+solution.denominators;
+	else result=solution.numerators+"\\"+solution.denominators;*/
+	string result=countEquation(equ),ans;
 	cout<<"("<<n<<") "<<equ<<"=";
 	cin>>ans;
 	if (ans==result)

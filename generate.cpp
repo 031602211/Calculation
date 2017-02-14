@@ -1,4 +1,5 @@
 #include"head.h"
+
 int flag=1,k=0;
 int getRand(int down,int up)//生成随机数 
 {
@@ -65,16 +66,19 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 						stringstream tmps;
 						tmps<<getRand(low,high);
 						tmps>>paras1;
-						Fraction frac2=simplifyFrac(getFrac(low,high));
-						paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
+						Fraction frac2=frac2.simplify(frac2.getFrac(low,high));
+						//paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
+						paras2=frac2.transString(frac2);
 						break;
 					}
 					case 3: //分数和分数 
 					{
-						Fraction frac1=simplifyFrac(getFrac(low,high));
-						Fraction frac2=simplifyFrac(getFrac(low,high));
-						paras1="("+frac1.numerators+"\\"+frac1.denominators+")";
-						paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
+						Fraction frac1=frac1.simplify(frac1.getFrac(low,high));
+						Fraction frac2=frac2.simplify(frac2.getFrac(low,high));
+						//paras1="("+frac1.numerators+"\\"+frac1.denominators+")";
+						//paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
+						paras1=frac1.transString(frac1);
+						paras2=frac2.transString(frac2);
 						break;
 					}
 				}
