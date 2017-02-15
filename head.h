@@ -13,10 +13,11 @@
 #define random(a,b) (rand()%(b-a+1)+a)   
 #define MAX 1000
 using namespace std;
+static int opt; 
 
 /*generate.cpp*/ 
 int getRand(int down,int up);
-void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3);
+void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char flag3);
 
 /*Fraction.cpp*/
 /*struct Fraction
@@ -40,8 +41,8 @@ string countEquation(string infix);
 
 /*verify*/
 int ifOnly(string str,string se[],int k);
-void checkAndOutput(string equ,int n);
-void finalOut();
+void checkAndOutput(string equ,int n,int opt);
+void finalOut(int opt);
 
 class Fraction
 {
