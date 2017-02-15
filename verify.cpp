@@ -23,17 +23,21 @@ void checkAndOutput(string equ,int n)
 	cin>>ans;
 	if (ans==result)
 	{
-		cout<<"正确"<<endl;
+		if(opt==2)cout<<"Correct Answer!"<<endl;
+		else cout<<"正确"<<endl;
 		correct++;
 	}
 	else
 	{
-		cout<<"错误，正确答案为："<<result<<endl;
+		if(opt==2)cout<<"Wrong Answer! The correct answer is "<<result<<endl;
+		else cout<<"错误，正确答案为："<<result<<endl;
 		wrong++;
 	}
 }
-void finalOut()
+void finalOut(int opt)
 {
 	cout<<"********************************************************************"<<endl;
-	cout<<"做对了"<<correct<<"道题，做错了"<<wrong<<"道题";
+	cout<<"                                                                    "<<endl;
+	if(opt==2) cout<<"  "<<correct<<" answers are correct, "<<wrong<<" answers are wrong.";
+	else cout<<"做对了"<<correct<<"道题，做错了"<<wrong<<"道题";	
 }
