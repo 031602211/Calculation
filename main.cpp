@@ -5,6 +5,12 @@ int main()
 	int i,j,k,num,low,high;
 	char flag1,flag2,flag3,tmp;
 	
+	cout<<"请问要选择哪种语言/Which language you would like to choose?\n";
+	cout<<"输入 1 切换中文 ；输入 2 切换英文./input 1 for Chinese ; input 2 for English: ";
+	cin>>opt;
+	 
+	if(opt==1)
+  {
 	cout<<"请输入题目数(1~1000)：";
 	cin>>num;
 	
@@ -23,7 +29,28 @@ int main()
 	cin>>flag3;
 	
 	cout<<"********************************************************************"<<endl;
-	
+	cout<<"                                                                    "<<endl;
+  }
+    if(opt==2)
+  {
+  	cout<<"Please enter a number as the amount of the calculation questions: ";
+  	cin>>num;
+  	
+  	cout<<"Please enter the size range of the numbers'absolute value in the equation.(e.g 1 100): ";
+  	cin>>low>>high;
+  	
+  	cout<<"Would you permit the  multiplication and division as a part of the equation?(y/n): ";
+  	cin>>flag1;
+  	
+  	cout<<"Would you permit the fraction as a part of the equation?(y/n): ";
+  	cin>>flag2;
+  	
+  	cout<<"Would you permit the parenthesis--() as a part of the equation?(y/n): ";
+  	cin>>flag3;
+  	
+  	cout<<"********************************************************************"<<endl;
+  	cout<<"                                                                    "<<endl;
+  }
 	getAndCalculate(num,low,high,flag1,flag2,flag3);
 	return 0;
 }

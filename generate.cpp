@@ -173,5 +173,5 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 			i++;
 		}
 	}
-    finalOut();
+    finalOut(opt);
 }
