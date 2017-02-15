@@ -169,9 +169,9 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 		{
 			k++;
 			equation[k]=equ;
-            checkAndOutput(equ,i);
+            checkAndOutput(equ,i,opt);
 			i++;
 		}
 	}
-    finalOut();
+    finalOut(opt);
 }
