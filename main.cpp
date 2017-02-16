@@ -2,6 +2,7 @@
 //#include"fraction.h"
 int main()
 {
+	int opt;
 	int i,j,k,num,low,high;
 	char flag1,flag2,flag3,tmp;
 	
@@ -51,6 +52,6 @@ int main()
   	cout<<"********************************************************************"<<endl;
   	cout<<"                                                                    "<<endl;
   }
-	getAndCalculate(num,low,high,flag1,flag2,flag3);
+	getAndCalculate(opt,num,low,high,flag1,flag2,flag3);
 	return 0;
 }

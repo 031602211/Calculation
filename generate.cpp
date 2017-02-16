@@ -11,7 +11,7 @@ int getRand(int down,int up)//生成随机数
     return random(down,up);
 }
 string equation[MAX];
-void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
+void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char flag3)
 {
 	int i=1,tmp;
 	char sign;
@@ -169,9 +169,11 @@ void getAndCalculate(int num,int low,int high,char flag1,char flag2,char flag3)
 		{
 			k++;
 			equation[k]=equ;
-            checkAndOutput(equ,i);
+            checkAndOutput(equ,i,opt);
 			i++;
 		}
 	}
+	//extern int opt;
+	//cout<<opt; 
     finalOut(opt);
 }

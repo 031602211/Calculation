@@ -1,5 +1,6 @@
 #include"head.h"
 //#include"fraction.h"
+extern int opt;
 int correct=0,wrong=0;
 int ifOnly(string str,string se[],int k)
 {
@@ -12,7 +13,7 @@ int ifOnly(string str,string se[],int k)
 	    if (count==k) return 1;
 		else return 0;
 }
-void checkAndOutput(string equ,int n)
+void checkAndOutput(string equ,int n,int opt)
 {
 	/*Fraction solution=countEquation(equ);
 	string result,ans;
