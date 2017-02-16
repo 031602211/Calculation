@@ -1,12 +1,19 @@
+/*************************************************************
+文件名：stack.cpp 
+作者：许郁杨 日期：2016/02/16
+描述: 栈 
+主要功能包括：中缀转换为后缀、计算后缀 
+*************************************************************/
+
 #include"head.h"
-//#include"fraction.h"
-stack<char> stored;
-void transEquation(string infix,char postfix[])
+
+stack<char> stored; //运算符栈 
+void transEquation(string infix,char postfix[]) //中缀转为后缀 
 {
 	int i=0,j=0;
 	while (infix[i]!='\0')
 	{
-		if ((infix[i]>='0')&&(infix[i]<='9'))
+		if ((infix[i]>='0')&&(infix[i]<='9')) //判断数字 
 		{
 			while ((infix[i]>='0')&&(infix[i]<='9'))
 			{
@@ -14,12 +21,12 @@ void transEquation(string infix,char postfix[])
 					i++;
 					j++;
 			}
-			postfix[j]='!';
+			postfix[j]='!'; //标识单个整数 
 			j++;
 		}
-		if (infix[i]=='(')
+		if (infix[i]=='(') //判断分数 
 		{	
-			while (infix[i]!=')')
+			while (infix[i]!=')') //将分数作为整体 
     		{
 	    		postfix[j]=infix[i];
 		    	i++;
@@ -29,7 +36,7 @@ void transEquation(string infix,char postfix[])
     		i++;
     		j++;
 		}
-		if ((infix[i]=='+')||(infix[i]=='-'))
+		if ((infix[i]=='+')||(infix[i]=='-')) //判断'+'、'-' 
 		{
 			while ((!stored.empty())&&(stored.top()!='['))
 			{
@@ -39,7 +46,7 @@ void transEquation(string infix,char postfix[])
 			}
 			stored.push(infix[i]);
 		}
-		if ((infix[i]=='*')||(infix[i]=='/'))
+		if ((infix[i]=='*')||(infix[i]=='/')) //判断'*'、'/' 
 		{
 			while ((!stored.empty())&&(stored.top()!='[')&&((stored.top()=='*')||(stored.top()=='/')))
 			{
@@ -49,8 +56,8 @@ void transEquation(string infix,char postfix[])
 			}
 			stored.push(infix[i]);
 		}
-		if (infix[i]=='[') stored.push(infix[i]);
-		if (infix[i]==']')
+		if (infix[i]=='[') stored.push(infix[i]); //判断'[' 
+		if (infix[i]==']') //判断']' 
 		{
 			while (stored.top()!='[')
 			{
@@ -62,25 +69,25 @@ void transEquation(string infix,char postfix[])
 		}
 		i++;
 	}
-	while (!stored.empty())
+	while (!stored.empty()) //残余运算符 
 	{
 		postfix[j]=stored.top();
 		j++;
 		stored.pop();
 	}
-	postfix[j]='\0';
+	postfix[j]='\0'; //终止符 
 }
-Fraction figure[MAX];
-string countEquation(string infix)
+Fraction figure[MAX]; //数栈 
+string countEquation(string infix) //计算后缀的值 
 {
 	int i=0,point=-1;
 	char postfix[MAX];
 	transEquation(infix,postfix);
 	while (postfix[i]!='\0')
 	{
-		if ((postfix[i]>='0')&&(postfix[i]<='9'))
+		if ((postfix[i]>='0')&&(postfix[i]<='9')) //整数入栈 
 		{
-			double k=0;
+			double k=0; //int会计算出错 
 			while ((postfix[i]>='0')&&(postfix[i]<='9'))
 			{
 				k=10*k+postfix[i]-'0';
@@ -90,9 +97,9 @@ string countEquation(string infix)
 			figure[point]=figure[point].transFrac(k,1);
     	}
     	else
-    	if (postfix[i]=='(')
+    	if (postfix[i]=='(') //分数入栈 
     	{
-			double up=0,down=0;
+			double up=0,down=0; //int会计算出错 
 			i++;
 			while (postfix[i]!='\\')
 			{

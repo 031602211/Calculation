@@ -1,8 +1,14 @@
+/*************************************************************
+文件名：verify.cpp
+作者：盖嘉轩 日期：2016/02/16
+描述: 检验和输出结果 
+主要功能包括：判重、检验答案、输出答案 
+*************************************************************/
+
 #include"head.h"
-//#include"fraction.h"
-extern int opt;
+
 int correct=0,wrong=0;
-int ifOnly(string str,string se[],int k)
+int ifOnly(string str,string se[],int k) //判断表达式是否重复 
 {
 	int count=0;
 	for (int i=0;i<k;i++)
@@ -13,12 +19,8 @@ int ifOnly(string str,string se[],int k)
 	    if (count==k) return 1;
 		else return 0;
 }
-void checkAndOutput(string equ,int n,int opt)
+void checkAndOutput(string equ,int n,int opt) //检验答案并输出正确答案 
 {
-	/*Fraction solution=countEquation(equ);
-	string result,ans;
-	if (solution.denominator==1) result=solution.numerators;
-	else result=solution.numerators+"\\"+solution.denominators;*/
 	string result=countEquation(equ),ans;
 	cout<<"("<<n<<") "<<equ<<"=";
 	cin>>ans;
@@ -35,7 +37,7 @@ void checkAndOutput(string equ,int n,int opt)
 		wrong++;
 	}
 }
-void finalOut(int opt)
+void finalOut(int opt) //输出正误个数 
 {
 	cout<<"********************************************************************"<<endl;
 	cout<<"                                                                    "<<endl;

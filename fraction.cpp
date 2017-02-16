@@ -1,33 +1,19 @@
+/*************************************************************
+文件名：fraction.cpp 
+作者：许郁杨 日期：2016/02/16
+描述: 分数类 
+主要功能包括：分数的生成、转换和四则运算 
+*************************************************************/
+
 #include"head.h"
-/*class Fraction
-{
-	private:
-		int numerator,denominator;
-		string numerators,denominators;
-		int greatestCommonDivisor(int x,int y);
-		Fraction fixUp(Fraction frac); 
-	
-	public:
-		Fraction();
-		Fraction(int numerator,int denominator);
-		Fraction getFrac(int l,int h);
-		
-		Fraction simplify(Fraction frac);
-		string transString(Fraction frac);
-		string transToString(Fraction frac);
-		
-		friend const Fraction operator +(fraction frac1,fraction frac2);  
-        friend const Fraction operator -(fraction frac1,fraction frac2);  
-        friend const Fraction operator *(fraction frac1,fraction frac2);  
-        friend const Fraction operator /(fraction frac1,fraction frac2); 
-}*/
-int Fraction::greatestCommonDivisor(int x,int y)
+
+int Fraction::greatestCommonDivisor(int x,int y) //最大公约数 
 {
 	if (y==0) return x;
 	else return greatestCommonDivisor(y,x%y);
 }
 Fraction::Fraction(){ }
-Fraction Fraction::getFrac(int l,int h)
+Fraction Fraction::getFrac(int l,int h) //生成分数 
 {
 	Fraction frac;
 	int tmp1,tmp2;
@@ -43,7 +29,7 @@ Fraction Fraction::getFrac(int l,int h)
 	tmps6>>frac.denominators;
 	return frac;
 }
-Fraction Fraction::transFrac(int up,int down)
+Fraction Fraction::transFrac(int up,int down) //整数转换为分数 
 {
 	Fraction frac;
 	stringstream tmps9,tmps10;
@@ -55,7 +41,7 @@ Fraction Fraction::transFrac(int up,int down)
 	tmps10>>frac.denominators;
 	return frac;
 }
-void Fraction::fixUp(Fraction frac)
+void Fraction::fixUp(Fraction frac) //维护分母为正 
 {
 	if (frac.denominator<0)
 	{
@@ -63,7 +49,7 @@ void Fraction::fixUp(Fraction frac)
 		frac.numerator=-frac.numerator;
     }
 }
-Fraction Fraction::simplify(Fraction frac)
+Fraction Fraction::simplify(Fraction frac) //分数化简 
 {
 	int tmp;
 	char tmpc[MAX];
@@ -82,41 +68,41 @@ Fraction Fraction::simplify(Fraction frac)
 	tmps8>>frac.denominators;
 	return frac;
 }
-string Fraction::transString(Fraction frac)
+string Fraction::transString(Fraction frac) //分数转为字符串（不判断整数）
 {
 	string str;
 	str=frac.numerators+"\\"+frac.denominators;
 	return str;
 }
-string Fraction::transToString(Fraction frac)
+string Fraction::transToString(Fraction frac) //分数转为字符串（判断整数）
 {
 	string str;
 	if (frac.denominator==1) str=frac.numerators;
 	else str=frac.numerators+"\\"+frac.denominators;
 	return str;
 }
-const Fraction operator +(Fraction frac1,Fraction frac2)
+const Fraction operator +(Fraction frac1,Fraction frac2) //加法 
 {
 	Fraction answer;
 	answer.numerator=frac1.numerator*frac2.denominator+frac1.denominator*frac2.numerator;
 	answer.denominator=frac1.denominator*frac2.denominator;
 	return answer.simplify(answer);
 }
-const Fraction operator -(Fraction frac1,Fraction frac2)
+const Fraction operator -(Fraction frac1,Fraction frac2) //减法 
 {
 	Fraction answer;
 	answer.numerator=frac1.numerator*frac2.denominator-frac1.denominator*frac2.numerator;
 	answer.denominator=frac1.denominator*frac2.denominator;
 	return answer.simplify(answer);
 }
-const Fraction operator *(Fraction frac1,Fraction frac2)
+const Fraction operator *(Fraction frac1,Fraction frac2) //乘法 
 {
 	Fraction answer;
 	answer.numerator=frac1.numerator*frac2.numerator;
 	answer.denominator=frac1.denominator*frac2.denominator;
 	return answer.simplify(answer);
 }
-const Fraction operator /(Fraction frac1,Fraction frac2)
+const Fraction operator /(Fraction frac1,Fraction frac2) //除法 
 {
 	Fraction answer;
 	answer.numerator=frac1.numerator*frac2.denominator;

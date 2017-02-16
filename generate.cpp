@@ -1,3 +1,10 @@
+/*************************************************************
+文件名：generate.cpp
+作者：盖嘉轩 日期：2016/02/16
+描述: 生成表达式 
+主要功能包括：生成随机数、生成表达式 
+*************************************************************/
+
 #include"head.h"
 
 int flag=1,k=0;
@@ -67,7 +74,6 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 						tmps<<getRand(low,high);
 						tmps>>paras1;
 						Fraction frac2=frac2.simplify(frac2.getFrac(low,high));
-						//paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
 						paras2=frac2.transString(frac2);
 						break;
 					}
@@ -75,8 +81,6 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 					{
 						Fraction frac1=frac1.simplify(frac1.getFrac(low,high));
 						Fraction frac2=frac2.simplify(frac2.getFrac(low,high));
-						//paras1="("+frac1.numerators+"\\"+frac1.denominators+")";
-						//paras2="("+frac2.numerators+"\\"+frac2.denominators+")";
 						paras1=frac1.transString(frac1);
 						paras2=frac2.transString(frac2);
 						break;
@@ -96,7 +100,7 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 				tmp=getRand(1,4);
 				switch (tmp)
 				{
-					case 1:
+					case 1: //无括号 
 					{
 						if (flag4==1)
 						{
@@ -116,7 +120,7 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 						else equ=paras1+sign+equ;
 					    break;
 					}
-					case 3:
+					case 3: //有括号 
 					{
 						if (flag4==1)
 						{
@@ -165,7 +169,7 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 				}
 			}
 		}
-		if (ifOnly(equ,equation,k)==1)
+		if (ifOnly(equ,equation,k)==1) //判断表达式是否重复 
 		{
 			k++;
 			equation[k]=equ;
@@ -173,7 +177,5 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 			i++;
 		}
 	}
-	//extern int opt;
-	//cout<<opt; 
     finalOut(opt);
 }
