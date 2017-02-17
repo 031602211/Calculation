@@ -71,14 +71,14 @@ Fraction Fraction::simplify(Fraction frac) //分数化简
 string Fraction::transString(Fraction frac) //分数转为字符串（不判断整数）
 {
 	string str;
-	str=frac.numerators+"\\"+frac.denominators;
+	str="("+frac.numerators+"\\"+frac.denominators+")";
 	return str;
 }
 string Fraction::transToString(Fraction frac) //分数转为字符串（判断整数）
 {
 	string str;
 	if (frac.denominator==1) str=frac.numerators;
-	else str=frac.numerators+"\\"+frac.denominators;
+	else str="("+frac.numerators+"\\"+frac.denominators+")";
 	return str;
 }
 const Fraction operator +(Fraction frac1,Fraction frac2) //加法 
