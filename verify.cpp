@@ -8,20 +8,20 @@
 #include"head.h"
 
 int correct=0,wrong=0;
-int ifOnly(string str,string se[],int k) //判断表达式是否重复 
+bool ifOnly(string str,vector<string> se) //判断表达式是否重复 
 {
 	int count=0;
-	for (int i=0;i<k;i++)
+	for (int i=0;i<se.size();i++)
 	{
 		if (str!=se[i]) count++;
 		else break;
 	}
-	    if (count==k) return 1;
-		else return 0;
+	    if (count==se.size()) return true;
+		else return false;
 }
-void checkAndOutput(string equ,int n,int opt) //检验答案并输出正确答案 
+void checkAndOutput(string equ,int n,int opt,string result) //检验答案并输出正确答案 
 {
-	string result=countEquation(equ),ans;
+	string ans;
 	cout<<"("<<n<<") "<<equ<<"=";
 	cin>>ans;
 	if (ans==result)

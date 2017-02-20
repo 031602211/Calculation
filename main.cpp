@@ -9,7 +9,7 @@
 
 int main()
 {
-	int i,j,k,num,low,high,opt;
+	int i,j,k,num,low,high,opt,flag0;
 	char flag1,flag2,flag3,tmp;
 	
 	cout<<"请问要选择哪种语言/Which language you would like to choose?\n";
@@ -24,10 +24,13 @@ int main()
 		cout<<"请输入算式中的数字大小的绝对值范围(如：1 100)：";
 		cin>>low>>high;
 		
+		cout<<"请输入算式中所需包含的数字个数(2~10)："; 
+		cin>>flag0;
+		
 		cout<<"是否允许乘除(y/n):";
 		cin>>flag1;
 		
-		cout<<"是否允许分数(y/n)(结果请以假分数的形式输出,例如13\\5):";
+		cout<<"是否允许分数(y/n)(结果请以带括号的假分数的形式输出,例如 (13\\5) ):";
 		cin>>flag2;
 		
 		cout<<"是否允许括号(y/n):";
@@ -38,11 +41,14 @@ int main()
 	}
     if(opt==2)
 	{
-		cout<<"Please enter a number as the amount of the calculation questions: ";
+		cout<<"Please input a number as the amount of the calculation questions: ";
 		cin>>num;
 		
-		cout<<"Please enter the size range of the numbers'absolute value in the equation.(e.g 1 100): ";
+		cout<<"Please input the size range of the numbers'absolute value in the equation.(e.g 1 100): ";
 		cin>>low>>high;
+		
+		cout<<"Please input the number of the figures that are included in the equation(2~10): ";
+		cin>>flag0;
 		
 		cout<<"Would you permit the  multiplication and division as a part of the equation?(y/n): ";
 		cin>>flag1;
@@ -56,6 +62,6 @@ int main()
 		cout<<"********************************************************************"<<endl;
 		cout<<"                                                                    "<<endl;
 	}
-	getAndCalculate(opt,num,low,high,flag1,flag2,flag3);
+	getAndCalculate(opt,num,low,high,flag0,flag1,flag2,flag3);
 	return 0;
 }

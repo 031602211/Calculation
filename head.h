@@ -12,6 +12,7 @@
 #include<sstream>
 #include<cmath>
 #include<ctime>
+#include<vector>
 #include<stack>
 #include<cassert>
 #define Min(x,y) (((x)<(y))?(x):(y))
@@ -22,15 +23,15 @@ using namespace std;
 
 /*generate.cpp*/ 
 int getRand(int down,int up);
-void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char flag3);
+void getAndCalculate(int opt,int num,int low,int high,int flag0,char flag1,char flag2,char flag3);
 
 /*Stack.cpp*/ 
 void transEquation(string infix,char postfix[]);
 string countEquation(string infix);
 
 /*verify.cpp*/
-int ifOnly(string str,string se[],int k);
-void checkAndOutput(string equ,int n,int opt);
+bool ifOnly(string str,vector<string> se);
+void checkAndOutput(string equ,int n,int opt,string result);
 void finalOut(int opt);
 
 /*fraction.cpp*/
@@ -40,12 +41,13 @@ class Fraction
 		int numerator,denominator;
 		string numerators,denominators;
 		int greatestCommonDivisor(int x,int y);
-		void fixUp(Fraction frac); 
 	
 	public:
 		Fraction();
 		Fraction(int numerator,int denominator);
 		Fraction getFrac(int l,int h);
+		bool checkZero(Fraction frac);
+		bool checkInt(Fraction frac);
 		Fraction transFrac(int up,int down);
 		
 		Fraction simplify(Fraction frac);

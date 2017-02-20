@@ -17,16 +17,16 @@ int getRand(int down,int up)//生成随机数
     }
     return random(down,up);
 }
-string equation[MAX];
-void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char flag3)
+vector<string> equation;
+void getAndCalculate(int opt,int num,int low,int high,int flag0,char flag1,char flag2,char flag3)
 {
 	int i=1,tmp;
 	char sign;
 	while (i<=num)
 	{
-		int flag4=1,number=getRand(2,7);
+		int flag4=1,number=flag0;
 		string paras1,paras2,equ;
-		for (int j=0;j<number;j++)
+		for (int j=0;j<number-1;j++)
 		{
 			if (flag1=='y') //允许乘除 
 			{
@@ -169,11 +169,11 @@ void getAndCalculate(int opt,int num,int low,int high,char flag1,char flag2,char
 				}
 			}
 		}
-		if (ifOnly(equ,equation,k)==1) //判断表达式是否重复 
+		string result=countEquation(equ);
+		if ((ifOnly(equ,equation))&&(result!="non_comformance")) //判断表达式是否重复以及是否除零 
 		{
-			k++;
-			equation[k]=equ;
-            checkAndOutput(equ,i,opt);
+			equation.push_back(equ);
+            checkAndOutput(equ,i,opt,result);
 			i++;
 		}
 	}

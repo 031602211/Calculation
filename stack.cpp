@@ -7,11 +7,12 @@
 
 #include"head.h"
 
-stack<char> stored; //运算符栈 
+ //运算符栈 
 void transEquation(string infix,char postfix[]) //中缀转为后缀 
 {
-	int i=0,j=0;
-	while (infix[i]!='\0')
+	int i=0,j=0;stack<char> stored;
+	while (i<infix.size())
+	//while (infix[i]!='\0')
 	{
 		if ((infix[i]>='0')&&(infix[i]<='9')) //判断数字 
 		{
@@ -77,13 +78,13 @@ void transEquation(string infix,char postfix[]) //中缀转为后缀
 	}
 	postfix[j]='\0'; //终止符 
 }
-Fraction figure[MAX]; //数栈 
+ //数栈 
 string countEquation(string infix) //计算后缀的值 
 {
-	int i=0,point=-1;
-	char postfix[MAX];
+	int i=0,point=-1,check=0;
+	char postfix[MAX];Fraction figure[MAX];
 	transEquation(infix,postfix);
-	while (postfix[i]!='\0')
+	while ((postfix[i]!='\0')&&(i<1000))
 	{
 		if ((postfix[i]>='0')&&(postfix[i]<='9')) //整数入栈 
 		{
@@ -126,10 +127,12 @@ string countEquation(string infix) //计算后缀的值
 				         break;
 				case '*':figure[point]=figure[point]*figure[point+1];
 				         break;
-				case '/':figure[point]=figure[point]/figure[point+1];
+				case '/':if (figure[point+1].checkZero(figure[point+1])) check=1; //标识除零 
+					     figure[point]=figure[point]/figure[point+1];
 			}
 		}
 		i++;
 	}
-	return figure[point].transToString(figure[point]);
+	if ((check==0)&&(figure[point].checkInt(figure[point]))) return figure[point].transToString(figure[point]); //判断是否除零 
+	else return "non_comformance";
 }

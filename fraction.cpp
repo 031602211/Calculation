@@ -16,11 +16,14 @@ Fraction::Fraction(){ }
 Fraction Fraction::getFrac(int l,int h) //生成分数 
 {
 	Fraction frac;
-	int tmp1,tmp2;
+	int tmp1=0,tmp2=0;
 	char tmpc[MAX];
 	stringstream tmps5,tmps6;
-	tmp1=getRand(l,h);
-	tmp2=getRand(l,h);
+	while (Max(tmp1,tmp2)==0) //防止分母为零 
+	{
+		tmp1=getRand(l,h);
+		tmp2=getRand(l,h);
+	}
 	frac.numerator=Min(tmp1,tmp2);
 	frac.denominator=Max(tmp1,tmp2);
 	tmps5<<frac.numerator;
@@ -28,6 +31,16 @@ Fraction Fraction::getFrac(int l,int h) //生成分数
 	tmps6<<frac.denominator;
 	tmps6>>frac.denominators;
 	return frac;
+}
+bool Fraction::checkZero(Fraction frac) //防止除数为零 
+{
+	if (frac.numerator==0) return true;
+	else return false;
+}
+bool Fraction::checkInt(Fraction frac)
+{
+	if (frac.denominator==1) return true;
+	else return false;
 }
 Fraction Fraction::transFrac(int up,int down) //整数转换为分数 
 {
@@ -41,24 +54,20 @@ Fraction Fraction::transFrac(int up,int down) //整数转换为分数
 	tmps10>>frac.denominators;
 	return frac;
 }
-void Fraction::fixUp(Fraction frac) //维护分母为正 
-{
-	if (frac.denominator<0)
-	{
-		frac.denominator=-frac.denominator;
-		frac.numerator=-frac.numerator;
-    }
-}
 Fraction Fraction::simplify(Fraction frac) //分数化简 
 {
 	int tmp;
 	char tmpc[MAX];
 	stringstream tmps7,tmps8;
-	fixUp(frac);
+	if (frac.denominator<0)
+	{
+		frac.denominator=-frac.denominator;
+		frac.numerator=-frac.numerator;
+    }
 	if (frac.numerator==0) frac.denominator=1;
 	else
 	{
-		tmp=greatestCommonDivisor(fabs(frac.numerator),fabs(frac.denominator));
+		tmp=greatestCommonDivisor(abs(frac.denominator),abs(frac.numerator));
 		frac.numerator/=tmp;
 		frac.denominator/=tmp;
 	}
