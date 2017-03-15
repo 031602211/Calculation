@@ -1,16 +1,5 @@
-﻿  verify.cpp
-c:\users\asus\desktop\c++\calculation\calculation\verify.cpp(15): warning C4018: “<”: 有符号/无符号不匹配
-  stack.cpp
-c:\users\asus\desktop\c++\calculation\calculation\stack.cpp(14): warning C4018: “<”: 有符号/无符号不匹配
-c:\users\asus\desktop\c++\calculation\calculation\stack.cpp(98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-c:\users\asus\desktop\c++\calculation\calculation\stack.cpp(117): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  main.cpp
+﻿  main.cpp
 c:\users\asus\desktop\c++\calculation\calculation\main.cpp(13): warning C4101: “k”: 未引用的局部变量
 c:\users\asus\desktop\c++\calculation\calculation\main.cpp(13): warning C4101: “j”: 未引用的局部变量
-  generate.cpp
-  fraction.cpp
-c:\users\asus\desktop\c++\calculation\calculation\fraction.cpp(20): warning C4101: “tmpc”: 未引用的局部变量
-c:\users\asus\desktop\c++\calculation\calculation\fraction.cpp(60): warning C4101: “tmpc”: 未引用的局部变量
-  正在生成代码...
   Calculation.vcxproj -> C:\Users\ASUS\Desktop\C++\Calculation\Debug\Calculation.exe
   Calculation.vcxproj -> C:\Users\ASUS\Desktop\C++\Calculation\Debug\Calculation.pdb (Full PDB)

@@ -1,8 +1,8 @@
-/*************************************************************
-ÎÄ¼şÃû£ºmain.cpp
-×÷Õß£º¸Ç¼ÎĞù ĞíÓôÑî ÈÕÆÚ£º2017/03/14
-ÃèÊö: ³õÊ¼½çÃæ
-Ö÷Òª¹¦ÄÜ°üÀ¨£ºÓïÑÔÇĞ»»¡¢¹¦ÄÜÑ¡Ôñ
+ï»¿/*************************************************************
+æ–‡ä»¶åï¼šmain.cpp
+ä½œè€…ï¼šç›–å˜‰è½© è®¸éƒæ¨ æ—¥æœŸï¼š2017/03/14
+æè¿°: åˆå§‹ç•Œé¢
+ä¸»è¦åŠŸèƒ½åŒ…æ‹¬ï¼šè¯­è¨€åˆ‡æ¢ã€åŠŸèƒ½é€‰æ‹©
 *************************************************************/
 
 #include"head.h"
@@ -15,37 +15,38 @@ int main()
 	CString langName, langList, langStr;
 	string Lang;
 
-	wcout.imbue(locale("CHS"));
+	wcout.imbue(locale("CHS")); //è®¾ç½®åŒºåŸŸ
 	cout << "Which language you would like to choose?\n";
 	i = 1;
 	idValue = 0;
-	langList.LoadString(++idValue);
-	while (langList != "End")
+	
+	langList.LoadString(++idValue); //è½½å…¥è¯­è¨€åˆ—è¡¨
+	while (langList != "End") //è¾“å‡ºå¯é€‰è¯­è¨€åˆ—è¡¨
 	{
 		cout << i << '.';
-		wcout << (LPCTCH)langList << endl;
+		wcout << (LPCTSTR)langList << endl;
 		i++;
 		langList.LoadString(++idValue);
 	}
-	cout << "Please input the name of the language£º";
+	cout << "Please input the name of the languageï¼š";
 	
 	tmp = 0;
 	idValue = 0;
 	while (tmp == 0)
 	{	
 		char tmpc[MAX];
-		fgets(tmpc, MAX, stdin);
+		fgets(tmpc, MAX, stdin); //è¯»å…¥ç”¨æˆ·æ‰€é€‰è¯­è¨€
 		stringstream tmpcs;
 		tmpcs << tmpc;
-		tmpcs >> Lang;
-		langName = Lang.c_str();
+		tmpcs >> Lang; //è½¬æ¢ä¸ºstring
+		langName = Lang.c_str(); //è½¬æ¢ä¸ºCString
 		langList.LoadString(++idValue);
 		while (langList != "End")
 		{
 			if (langList == langName)
 			{
 				tmp = 1;
-				idValue *= 1000;
+				idValue *= 1000; //è·³è½¬è‡³å¯¹åº”è¯­è¨€èµ„æº
 				break;
 			}
 			langList.LoadString(++idValue);
@@ -53,7 +54,7 @@ int main()
 		if (tmp == 0)
 		{
 			idValue = 1;
-			cout << "Sorry, please choose other language£º";
+			cout << "Sorry, please choose other languageï¼š";
 		}
 	}
 
