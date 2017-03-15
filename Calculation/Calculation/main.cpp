@@ -39,6 +39,7 @@ int main()
 		stringstream tmpcs;
 		tmpcs << tmpc;
 		tmpcs >> Lang; //转换为string
+		tmpcs.clear();
 		langName = Lang.c_str(); //转换为CString
 		langList.LoadString(++idValue);
 		while (langList != "End")
