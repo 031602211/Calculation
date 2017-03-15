@@ -47,6 +47,15 @@
     <ClInclude Include="resource3.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="resource4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource6.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="English.rc">
@@ -56,6 +65,15 @@
       <Filter>资源文件</Filter>
     </ResourceCompile>
     <ResourceCompile Include="中文.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="日本语.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="Francais.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="Deutsch.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -31,11 +31,17 @@
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="resource3.h" />
+    <ClInclude Include="resource4.h" />
+    <ClInclude Include="resource5.h" />
+    <ClInclude Include="resource6.h" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="Deutsch.rc" />
     <ResourceCompile Include="English.rc" />
+    <ResourceCompile Include="Francais.rc" />
     <ResourceCompile Include="languageList.rc" />
     <ResourceCompile Include="中文.rc" />
+    <ResourceCompile Include="日本语.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{69633783-FE52-4FAD-91AF-A2815F2F9C71}</ProjectGuid>
