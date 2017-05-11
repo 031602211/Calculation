@@ -1,120 +1,158 @@
 /*************************************************************
 文件名：fraction.cpp
-作者：许郁杨 日期：2016/02/16
+作者：盖嘉轩 日期：2017/05/09
 描述: 分数类
-主要功能包括：分数的生成、转换和四则运算
+主要功能：分数的生成、转换和四则运算
+作者：盖嘉轩 日期：2017/05/10
 *************************************************************/
+#include"fraction.h"
+#include<iostream>
+#include<sstream>
+using namespace std;
 
-#include"head.h"
-
-int Fraction::greatestCommonDivisor(int x, int y) //最大公约数 
-{
-	if (y == 0) return x;
-	else return greatestCommonDivisor(y, x%y);
-}
 Fraction::Fraction() { }
-Fraction Fraction::getFrac(int l, int h) //生成分数 
+
+ 
+void Fraction::GetFraction(int l, int h)
 {
-	Fraction frac;
-	int tmp1 = 0, tmp2 = 0;
-	char tmpc[MAX];
-	stringstream tmps5, tmps6;
-	while (Max(tmp1, tmp2) == 0) //防止分母为零 
+	int ntmp1 = 0, ntmp2 = 0;
+	stringstream sstmp1, sstmp2;
+	while (Max(ntmp1, ntmp2) == 0)
 	{
-		tmp1 = getRand(l, h);
-		tmp2 = getRand(l, h);
+		ntmp1 = RandomNumber(l, h);
+		ntmp2 = RandomNumber(l, h);
 	}
-	frac.numerator = Min(tmp1, tmp2);
-	frac.denominator = Max(tmp1, tmp2);
-	tmps5 << frac.numerator;
-	tmps5 >> frac.numerators;
-	tmps6 << frac.denominator;
-	tmps6 >> frac.denominators;
-	return frac;
+	m_nnumerator = Min(ntmp1, ntmp2);
+	m_ndenominator = Max(ntmp1, ntmp2);
+	sstmp1 << m_nnumerator;
+	sstmp1 >> m_snumerator;
+	sstmp2 << m_ndenominator;
+	sstmp2 >> m_sdenominator;
 }
-bool Fraction::checkZero(Fraction frac) //防止除数为零 
+
+ 
+bool Fraction::isDivisorZero()
 {
-	if (frac.numerator == 0) return true;
-	else return false;
-}
-bool Fraction::checkInt(Fraction frac)
-{
-	if (frac.denominator == 1) return true;
-	else return false;
-}
-Fraction Fraction::transFrac(int up, int down) //整数转换为分数 
-{
-	Fraction frac;
-	stringstream tmps9, tmps10;
-	frac.numerator = up;
-	frac.denominator = down;
-	tmps9 << frac.numerator;
-	tmps9 >> frac.numerators;
-	tmps10 << frac.denominator;
-	tmps10 >> frac.denominators;
-	return frac;
-}
-Fraction Fraction::simplify(Fraction frac) //分数化简 
-{
-	int tmp;
-	char tmpc[MAX];
-	stringstream tmps7, tmps8;
-	if (frac.denominator<0)
+	if (m_nnumerator == 0)
 	{
-		frac.denominator = -frac.denominator;
-		frac.numerator = -frac.numerator;
+		return true;
 	}
-	if (frac.numerator == 0) frac.denominator = 1;
 	else
 	{
-		tmp = greatestCommonDivisor(abs(frac.denominator), abs(frac.numerator));
-		frac.numerator /= tmp;
-		frac.denominator /= tmp;
+		return false;
 	}
-	tmps7 << frac.numerator;
-	tmps7 >> frac.numerators;
-	tmps8 << frac.denominator;
-	tmps8 >> frac.denominators;
-	return frac;
 }
-string Fraction::transString(Fraction frac) //分数转为字符串（不判断整数）
+
+ 
+bool Fraction::IsInt()
 {
-	string str;
-	str = "(" + frac.numerators + "\\" + frac.denominators + ")";
-	return str;
+	if (m_ndenominator == 1) 
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
 }
-string Fraction::transToString(Fraction frac) //分数转为字符串（判断整数）
+
+ 
+void Fraction::TransferIntIntoFraction(int up, int down)
 {
-	string str;
-	if (frac.denominator == 1) str = frac.numerators;
-	else str = "(" + frac.numerators + "\\" + frac.denominators + ")";
-	return str;
+	stringstream sstmp1, sstmp2;
+	m_nnumerator = up;
+	m_ndenominator = down;
+	sstmp1 << m_nnumerator;
+	sstmp1 >> m_snumerator;
+	sstmp2 << m_ndenominator;
+	sstmp2 >> m_sdenominator;
+	sstmp1.clear();
+	sstmp2.clear();
 }
-const Fraction operator +(Fraction frac1, Fraction frac2) //加法 
+
+ 
+void Fraction::Simplify()
+{
+	int ntmp;
+	stringstream sstmp1, sstmp2;
+	if (m_ndenominator < 0) 
+	{
+		m_ndenominator = -m_ndenominator;
+		m_nnumerator = -m_nnumerator;
+	}
+	if (m_nnumerator == 0) 
+	{
+		m_ndenominator = 1;
+	}
+	else
+	{
+		ntmp = GreatestCommonDivisor(abs(m_ndenominator), abs(m_nnumerator));
+		m_nnumerator /= ntmp;
+		m_ndenominator /= ntmp;
+	}
+	sstmp1 << m_nnumerator;
+	sstmp1 >> m_snumerator;
+	sstmp2 << m_ndenominator;
+	sstmp2 >> m_sdenominator;
+	sstmp1.clear();
+	sstmp2.clear();
+}
+
+ 
+string Fraction::TransferIntoStringNoInt()
+{
+	return "(" + m_snumerator + "\\" + m_sdenominator + ")";
+}
+
+ 
+string Fraction::TransferIntoString()
+{
+	if (m_ndenominator == 1) 
+	{
+		return m_snumerator;
+	}
+	else
+	{
+		return "(" + m_snumerator + "\\" + m_sdenominator + ")";
+	}
+}
+
+ 
+const Fraction operator +(Fraction frac1, Fraction frac2)
 {
 	Fraction answer;
-	answer.numerator = frac1.numerator*frac2.denominator + frac1.denominator*frac2.numerator;
-	answer.denominator = frac1.denominator*frac2.denominator;
-	return answer.simplify(answer);
+	answer.m_nnumerator = frac1.m_nnumerator*frac2.m_ndenominator + frac1.m_ndenominator*frac2.m_nnumerator;
+	answer.m_ndenominator = frac1.m_ndenominator*frac2.m_ndenominator;
+	answer.Simplify();
+	return answer;
 }
-const Fraction operator -(Fraction frac1, Fraction frac2) //减法 
+
+ 
+const Fraction operator -(Fraction frac1, Fraction frac2)
 {
 	Fraction answer;
-	answer.numerator = frac1.numerator*frac2.denominator - frac1.denominator*frac2.numerator;
-	answer.denominator = frac1.denominator*frac2.denominator;
-	return answer.simplify(answer);
+	answer.m_nnumerator = frac1.m_nnumerator*frac2.m_ndenominator - frac1.m_ndenominator*frac2.m_nnumerator;
+	answer.m_ndenominator = frac1.m_ndenominator*frac2.m_ndenominator;
+	answer.Simplify();
+	return answer;
 }
-const Fraction operator *(Fraction frac1, Fraction frac2) //乘法 
+
+ 
+const Fraction operator *(Fraction frac1, Fraction frac2)
 {
 	Fraction answer;
-	answer.numerator = frac1.numerator*frac2.numerator;
-	answer.denominator = frac1.denominator*frac2.denominator;
-	return answer.simplify(answer);
+	answer.m_nnumerator = frac1.m_nnumerator*frac2.m_nnumerator;
+	answer.m_ndenominator = frac1.m_ndenominator*frac2.m_ndenominator;
+	answer.Simplify();
+	return answer;
 }
-const Fraction operator /(Fraction frac1, Fraction frac2) //除法 
+
+ 
+const Fraction operator /(Fraction frac1, Fraction frac2)
 {
 	Fraction answer;
-	answer.numerator = frac1.numerator*frac2.denominator;
-	answer.denominator = frac1.denominator*frac2.numerator;
-	return answer.simplify(answer);
+	answer.m_nnumerator = frac1.m_nnumerator*frac2.m_ndenominator;
+	answer.m_ndenominator = frac1.m_ndenominator*frac2.m_nnumerator;
+	answer.Simplify();
+	return answer;
 }

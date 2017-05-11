@@ -1,93 +1,153 @@
 ﻿/*************************************************************
 文件名：main.cpp
-作者：盖嘉轩 许郁杨 日期：2017/03/14
-描述: 初始界面
-主要功能包括：语言切换、功能选择
+作者：盖嘉轩 日期：2017/05/09
+描述: 主函数
+作者：盖嘉轩 日期：2017/05/09
+更新：使用命令行输入输出；在文件中输出题目数量和用户答案。
 *************************************************************/
+#include"expression.h"
+#include"auxiliary_functions.h"
+#include<iostream>
+#include<cstdlib>
+#include<cstring>
+#include<sstream>
+#include<cassert>
+#include<atlstr.h>
+#include<fstream>
+using namespace std;
+UINT g_idValue;//
 
-#include"head.h"
-UINT idValue;
-
-int main()
+int main(int argc, char *argv[])
 {
-	int i, j, k, num, low, high, flag0, tmp;
-	char flag1, flag2, flag3;
-	CString langName, langList, langStr;
-	string Lang;
-
-	wcout.imbue(locale("CHS")); //设置区域
+	wcout.imbue(locale("CHS"));// 
 	cout << "Which language you would like to choose?\n";
-	i = 1;
-	idValue = 0;
-	
-	langList.LoadString(++idValue); //载入语言列表
-	while (langList != "End") //输出可选语言列表
+
+	int serialNumber = 1;// 
+	g_idValue = 0;
+	CString languageList;// 
+	languageList.LoadString(++g_idValue);// 
+	while (languageList != "End")// 
 	{
-		cout << i << '.';
-		wcout << (LPCTSTR)langList << endl;
-		i++;
-		langList.LoadString(++idValue);
+		cout << serialNumber << '.';
+		wcout << (LPCTSTR)languageList << endl;
+		serialNumber++;
+		languageList.LoadString(++g_idValue);
 	}
-	cout << "Please input the name of the language：";
-	
-	tmp = 0;
-	idValue = 0;
-	while (tmp == 0)
-	{	
-		char tmpc[MAX];
-		fgets(tmpc, MAX, stdin); //读入用户所选语言
-		stringstream tmpcs;
-		tmpcs << tmpc;
-		tmpcs >> Lang; //转换为string
-		tmpcs.clear();
-		langName = Lang.c_str(); //转换为CString
-		langList.LoadString(++idValue);
-		while (langList != "End")
+	cout << "Please input the name of the language: ";
+
+	bool isSupportLanguage = false;// 
+	g_idValue = 0;
+	while (!isSupportLanguage)
+	{
+		char Language[kMax];// 
+		fgets(Language, kMax, stdin);
+		isSupportLanguage = MatchLanguage(Language);
+		if (!isSupportLanguage)// 
 		{
-			if (langList == langName)
-			{
-				tmp = 1;
-				idValue *= 1000; //跳转至对应语言资源
-				break;
-			}
-			langList.LoadString(++idValue);
-		}
-		if (tmp == 0)
-		{
-			idValue = 1;
-			cout << "Sorry, please choose other language：";
+			cout << "Sorry, please choose other language: ";
 		}
 	}
 
-	langStr.LoadString(idValue);
-	wcout << endl << (LPCTSTR)langStr;
-	cin >> num;
+	int problemNumber;// 
+	problemNumber = ReadFile(argv[1]);
 
-	langStr.LoadString(++idValue);
-	wcout << (LPCTSTR)langStr;
+	CString sentence;// 
+	sentence.LoadString(g_idValue);
+	wfstream wostream;
+	wostream.imbue(locale("CHS"));
+	wostream.open(argv[2], ios::out);
+	wostream << (LPCTSTR)sentence << problemNumber << endl << endl << "********************************************************************" << endl << endl;
+	wostream.close();
+
+	int low, high;// 
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence;
 	cin >> low >> high;
 
-	langStr.LoadString(++idValue);
-	wcout << (LPCTSTR)langStr;
-	cin >> flag0;
+	int parameterNumber;// 
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence;
+	cin >> parameterNumber;
 
-	langStr.LoadString(++idValue);
-	wcout << (LPCTSTR)langStr;
-	cin >> flag1;
+	char ifMultiplyDivide;// 
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence;
+	cin >> ifMultiplyDivide;
 
-	langStr.LoadString(++idValue);
-	wcout << (LPCTSTR)langStr;
-	cin >> flag2;
+	char ifFraction;// 
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence;
+	cin >> ifFraction;
 
-	langStr.LoadString(++idValue);
-	wcout << (LPCTSTR)langStr;
-	cin >> flag3;
-
-	idValue++;
+	char ifBracket;// 
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence;
+	cin >> ifBracket;
 
 	cout << endl << "********************************************************************" << endl;
-	cout << "                                                                    " << endl;
+	cout << endl;
 
-	getAndCalculate(num, low, high, flag0, flag1, flag2, flag3);
+	sentence.LoadString(++g_idValue);
+	wcout << (LPCTSTR)sentence << endl << endl;// 
+
+	g_idValue += 2;
+
+	int correct = 0, wrong = 0;// 
+	for (int i = 1; i <= problemNumber; i++)
+	{
+		Expression expression;// 
+		string answer;// 
+		string result;// 
+		string equation;// 
+
+		equation = expression.GenerateInfixExpression(low, high, parameterNumber, ifMultiplyDivide, ifFraction, ifBracket);
+		cout << "(" << i << ") " << equation << "=";
+		cin >> answer;
+		cout << endl;
+
+		fstream ostream;
+		wfstream wostream;
+
+		wostream.imbue(locale("CHS"));
+
+		ostream.open(argv[2], ios::app);
+		ostream << "(" << i << ") " << equation << endl;
+		ostream.close();
+
+		if (answer == "e")// 
+		{
+			PrintFinalResult(argv[2], correct, wrong);
+			exit(0);
+		}
+
+		WriteFile(argv[2], g_idValue + 3);
+
+		ostream.open(argv[2], ios::app);
+		ostream << answer << endl;
+		ostream.close();
+
+		result = expression.CalculateResult();
+		if (answer == result)// 
+		{
+			WriteFile(argv[2], g_idValue - 1);
+
+			correct++;
+		}
+		else// 
+		{
+			WriteFile(argv[2], g_idValue);
+
+			ostream.open(argv[2], ios::app);
+			ostream << result << endl;
+			ostream.close();
+
+			wrong++;
+		}
+		ostream.open(argv[2], ios::app);
+		ostream << endl;
+		ostream.close();
+	}
+	cout << "********************************************************************" << endl;
+	PrintFinalResult(argv[2], correct, wrong);// 
 	return 0;
 }

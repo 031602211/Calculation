@@ -18,23 +18,17 @@
     <ClCompile Include="fraction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="generate.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="stack.cpp">
+    <ClCompile Include="expression.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="verify.cpp">
+    <ClCompile Include="auxiliary_functions.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="head.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -54,6 +48,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource6.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="auxiliary_functions.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
